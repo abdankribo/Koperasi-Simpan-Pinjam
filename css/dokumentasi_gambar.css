@@ -1,0 +1,459 @@
+body{
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/*Navabar Style*/
+
+.navbar{
+  z-index: 3;
+}
+* {
+  z-index: 2;
+}
+
+.accsent-img{
+  z-index: 1;
+}
+
+.img-hero{
+  z-index: 1;
+}
+
+.navbar-brand{
+  font-weight: 700    ;
+}
+
+.nav-link{
+  font-size: 16px;
+}
+
+.button-primary{
+  width: 80px;
+  height: 30px;
+  background-color: transparent;
+  border: none;
+  font-size: 16px;
+  font-weight: 700;
+  color: white;
+  text-decoration: none;
+}
+
+.link-up{
+  text-decoration: none;
+  font-size: 16px;
+  color: white;
+  border-color: #009D9D;
+  font-weight: bold;
+}
+
+.link-up:hover{
+  color: white;
+}
+
+.link-up4{
+  text-decoration: none;
+  color: white;
+}
+.link-up4:hover{
+  color: #009D9D;   
+}
+
+
+/*Hero Section Style*/
+
+#hero {
+  margin-top: 5%;
+  height: 100%;
+  width: 100%;
+  margin-bottom: 5%;
+}
+
+.hero-tagline h1 {
+  font-weight: 700;
+  font-size: 50px;
+  line-height: 72px;
+}
+
+.hero-tagline p {
+  width: 70%;
+  margin-left: 15%;
+  font-size: 16px;
+
+  margin-bottom: 60px;
+  line-height: 30px;
+  width: 85%;
+}
+
+.custom-style {
+  font-size: 50px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.ibukcontainer {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+
+/* Footer Style*/
+#contact {
+  background-image: url(../assets/img/kontak-img.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#contact .overlay {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+#contact .container {
+  padding: 148px 0 148px 0;
+}
+
+#contact h3{
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 60px;
+  color: white;
+}
+
+#contact h6{
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 27px;
+  color: white;
+  margin: 19px 0 14px 0;
+}
+
+.kontak a {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 18px;
+  color: white;
+  text-decoration: none;
+  margin-left: 18px;
+  width: 332px;
+  display: inline-block;
+}
+
+.card-contact{
+  width: 100%;
+  height: 400px;
+  background: white;
+  border-radius: 5px;
+  padding: 52px 48px;
+}
+
+.card-contact h2 {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 60px;
+  margin-bottom: 21px;
+}
+
+.form-control{
+  border-radius: 0;
+}
+
+
+.form-floating label {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 16px;
+  
+}
+
+.button-kontak{
+  width: 100%;
+  height: 75%;
+  border: none;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 36px;
+  background: black;
+  color: white;
+}
+
+/* IGM  */
+.img-thumbnail {
+  border: none; /* Menghapus border atau garis tepi */
+}
+
+
+/* ANIMATION */
+
+.teamcontainer {
+  /* width: 100%; */
+  margin-left: 50px;
+  margin-right: 50px;
+  transition: transform 0.2s;
+}
+
+.wave-effect {
+  transform: translateY(-5px);
+}
+
+
+@keyframes bounceIn {
+  0% {
+    transform: scale(0);
+  }
+  25% {
+    transform: scale(1.1);
+  }
+  50% {
+    transform: scale(0.9);
+  }
+  70% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+
+@keyframes bounceOut {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.1);
+  }
+  50% {
+    transform: scale(0.9);
+  }
+  75% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+
+
+.bounceIn {
+  animation-name: bounceIn;
+  animation-duration: 0.75s; /* Durasi animasi 2 detik */
+}
+
+
+.bounceOut {
+  animation-name: bounceOut;
+}
+
+
+
+
+/*--------------------------------------------------------------
+# Portfolio Details Section
+--------------------------------------------------------------*/
+.portfolio-details .portfolio-details-slider img {
+  width: 100%;
+}
+
+.portfolio-details .portfolio-details-slider .swiper-pagination {
+  margin-top: 20px;
+  position: relative;
+}
+
+.portfolio-details
+  .portfolio-details-slider
+  .swiper-pagination
+  .swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  background-color: color-mix(in srgb, var(--default-color), transparent 85%);
+  opacity: 1;
+}
+
+.portfolio-details
+  .portfolio-details-slider
+  .swiper-pagination
+  .swiper-pagination-bullet-active {
+  background-color: var(--accent-color);
+}
+
+.portfolio-details .portfolio-info {
+  padding: 30px;
+  box-shadow: 0px 0 30px
+    color-mix(in srgb, var(--default-color), transparent 90%);
+}
+
+.portfolio-details .portfolio-info h3 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid
+    color-mix(in srgb, var(--default-color), transparent 85%);
+}
+
+.portfolio-details .portfolio-info ul {
+  list-style: none;
+  padding: 0;
+  font-size: 15px;
+}
+
+.portfolio-details .portfolio-info ul li + li {
+  margin-top: 10px;
+}
+
+.portfolio-details .portfolio-description {
+  padding-top: 30px;
+}
+
+.portfolio-details .portfolio-description h2 {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.portfolio-details .portfolio-description p {
+  padding: 0;
+  color: color-mix(in srgb, var(--default-color), transparent 30%);
+}
+
+
+/* CSS untuk gambar yang membesar */
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+#overlay img {
+  max-width: 90%;
+  max-height: 90%;
+}
+
+#overlay:target {
+  display: flex;
+}
+
+/*--------------------------------------------------------------
+# Disable aos animation delay on mobile devices
+--------------------------------------------------------------*/
+@media screen and (max-width: 768px) {
+  [data-aos-delay] {
+    transition-delay: 0 !important;
+  }
+}
+
+/*--------------------------------------------------------------
+# Global Section Titles
+--------------------------------------------------------------*/
+
+/* h2{ 
+  font-weight: bold;
+  } */
+.section-title {
+  padding-top: 60px;
+  text-align: center;
+  padding-bottom: 60px;
+  text-transform: uppercase;
+  position: center; 
+}
+
+.section-title p {
+  margin-bottom: 0;
+}
+
+  
+
+
+.section-title h2 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  text-transform: uppercase;
+  /* text-align: center;  */
+  /* position: center;  */
+}
+
+
+
+
+
+/* FOOTER STYLE */
+footer{
+  width: 100%;
+  height: 100px;
+  padding-top: 10px;
+  margin-top: auto;
+  background: #009D9D;
+  
+}
+
+.imgfoot{
+  width: 25px;
+  height: 25px;
+  margin-right: 5px;
+}
+
+.copyright {
+  text-align: left;
+  color: white;
+  font-size: 10px;
+}
+
+footer a {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 30px;
+  color: white;
+  text-decoration: none;
+}
+
+h2{
+  
+  /* margin-left: 15%; */
+  font-weight: bold;
+}
+
+@media only screen and (max-width: 1080px) {
+  
+  /* Atur tata letak untuk layar dengan lebar maksimum 600px */
+  #hero {
+      margin-top: 10%;
+      width: 100%; /* Misalnya, atur lebar kotak menjadi lebih kecil */
+  }
+}
+
+
+@media only screen and (max-width: 720px) {
+  
+  /* Atur tata letak untuk layar dengan lebar maksimum 600px */
+  #hero {
+      margin-top: 20%;
+      width: 100%; /* Misalnya, atur lebar kotak menjadi lebih kecil */
+  }
+  h2{
+  
+      text-align: center;
+  }
+}

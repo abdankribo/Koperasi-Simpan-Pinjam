@@ -1,0 +1,260 @@
+
+body{
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/*Navabar Style*/
+
+.navbar{
+    z-index: 3;
+}
+* {
+    z-index: 2;
+}
+
+.accsent-img{
+    z-index: 1;
+}
+
+
+.img-hero{
+    z-index: 1;
+}
+
+.navbar-brand{
+    font-weight: 700    ;
+}
+
+.nav-link{
+    font-size: 16px;
+}
+
+.button-primary{
+    width: 80px;
+    height: 30px;
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+}
+
+/* .button-secondary{
+    width: 80px;
+    height: 30px;
+    background-color: white;
+    border: none;
+    font-size: 16px;
+    font-weight: 700;
+    color: #009D9D;
+    
+} */
+
+.link-up{
+    text-decoration: none;
+    font-size: 16px;
+    color: white;
+    border-color: #009D9D;
+    font-weight: bold;
+}
+
+.link-up:hover{
+    color: white;
+}
+
+.link-up2{
+    text-decoration: none;
+    color: red;
+}
+.link-up2:hover{
+    color: white;   
+}
+
+.link-up3{
+    text-decoration: none;
+    color: blue;
+}
+.link-up3:hover{
+    color: white;
+}
+
+.link-up4{
+    text-decoration: none;
+    color: white;
+}
+.link-up4:hover{
+    color: #009D9D;   
+}
+
+/*Hero Section Style*/
+
+#hero {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    height: 100%;
+    width: 100%;
+}
+
+.img-hero{
+    
+    height: 100%;
+}
+
+.hero-tagline h1 {
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 72px;
+}
+
+.hero-tagline p {
+    font-size: 16px;
+    margin-top: 20px;
+    margin-bottom: 60px;
+    line-height: 30px;
+    width: 85%;
+}
+
+.pdf_style{
+    text-decoration: none;
+}
+
+
+/* Footer Style*/
+#contact {
+    background-image: url(../assets/img/kontak-img.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#contact .overlay {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+#contact .container {
+    padding: 148px 0 148px 0;
+}
+
+#contact h3{
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 60px;
+    color: white;
+}
+
+#contact h6{
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 27px;
+    color: white;
+    margin: 19px 0 14px 0;
+}
+
+.kontak a {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 18px;
+    color: white;
+    text-decoration: none;
+    margin-left: 18px;
+    width: 332px;
+    display: inline-block;
+}
+
+.card-contact{
+    width: 100%;
+    height: 400px;
+    background: white;
+    border-radius: 5px;
+    padding: 52px 48px;
+}
+
+.card-contact h2 {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 60px;
+    margin-bottom: 21px;
+}
+
+.form-control{
+    border-radius: 0;
+}
+
+
+.form-floating label {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 16px;
+    
+}
+
+.button-kontak{
+    width: 100%;
+    height: 75%;
+    border: none;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 36px;
+    background: black;
+    color: white;
+}
+
+footer{
+    width: 100%;
+    height: 100px;
+    padding-top: 10px;
+    margin-top: auto;
+    background: #009D9D;
+    
+}
+
+.imgfoot{
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+}
+
+.copyright {
+    text-align: left;
+    color: white;
+    font-size: 10px;
+}
+
+footer a {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 30px;
+    color: white;
+    text-decoration: none;
+}
+
+@media only screen and (max-width: 1080px) {
+    
+    /* Atur tata letak untuk layar dengan lebar maksimum 600px */
+    #hero {
+        margin-top: 10%;
+        width: 100%; /* Misalnya, atur lebar kotak menjadi lebih kecil */
+    }
+}
+
+
+@media only screen and (max-width: 720px) {
+    
+    /* Atur tata letak untuk layar dengan lebar maksimum 600px */
+    #hero {
+        margin-top: 10%;
+        width: 100%; /* Misalnya, atur lebar kotak menjadi lebih kecil */
+    }
+}
