@@ -22,8 +22,16 @@ Repository ini sedang dimigrasikan dari aplikasi PHP native + MySQL/MariaDB menj
 - [x] UI responsif dan dashboard role-based
 - [x] Production build verification via GitHub Actions
 - [x] Role authorization and server-action guard verification
-- [ ] End-to-end testing against live database
-- [ ] Vercel project connection and deployment verification
+- [x] End-to-end testing against live database
+- [x] Vercel project connection and deployment verification
+- [x] Master Admin sebagai pusat kendali akun dan administrasi
+- [x] Manajemen akun Master Admin, Admin, dan Anggota
+- [x] Manajemen kelompok Master dan kelompok koperasi
+- [x] Edit lengkap data anggota dan validasi data
+- [x] Pencegahan username duplikat lintas role
+- [x] Pencegahan nomor anggota duplikat
+- [x] Nonaktifkan anggota tanpa menghapus riwayat transaksi
+- [x] Administrasi Admin dapat diakses melalui panel Master Admin
 
 ## Struktur database
 
@@ -68,8 +76,10 @@ npm run dev
 
 - Build production sudah diverifikasi pada GitHub Actions.
 - Skema Prisma telah dipetakan terhadap dump `dinkopum_base.sql` yang ada di repository.
-- Pengujian koneksi ke database live belum dilakukan karena kredensial/database production belum terhubung pada environment verifikasi.
-- Deployment Vercel belum diverifikasi karena belum ada project Vercel yang terhubung ke repository ini.
+- Koneksi dan pengujian aplikasi terhadap database Railway production sudah dilakukan.
+- Aplikasi sudah terhubung dan berjalan pada deployment Vercel.
+- Alur login dan akses berdasarkan role sudah diverifikasi pada environment production.
+- Fitur Master Admin sudah disiapkan sebagai pusat kendali akun dan administrasi sistem.
 
 ## Bootstrap Master Admin
 
