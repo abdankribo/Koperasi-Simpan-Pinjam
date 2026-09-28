@@ -79,10 +79,12 @@ export default async function AdminPage() {
             <b>⌘ Kelompok</b>
             <span>Kelola daftar kelompok koperasi.</span>
           </Link>
-          <Link className="module" href="/master-admin">
-            <b>⚙️ Master Admin</b>
-            <span>Kelola unit dan akses administrasi.</span>
-          </Link>
+          {s.role === "master" && (
+            <Link className="module" href="/master-admin">
+              <b>⚙️ Panel Master Admin</b>
+              <span>Kembali ke panel Master untuk mengelola struktur, akun, dan unit.</span>
+            </Link>
+          )}
           <Link className="module" href="/admin/materi">
             <b>📚 Materi</b>
             <span>Kelola materi pelatihan koperasi.</span>
