@@ -1,2 +1,77 @@
-import Link from "next/link";import {prisma} from "@/lib/prisma";import {getSession} from "@/lib/auth";import {redirect} from "next/navigation";import {createSimpanan} from "../actions";
-export default async function Page(){const s=await getSession();if(!s||s.role!=="admin" && s.role!=="master")redirect("/login");const [rows,anggota]=await Promise.all([prisma.simpanan.findMany({orderBy:{idSmp:"desc"}}),prisma.anggota.findMany({orderBy:{nomorAnggota:"asc"}})]);return <main className="page"><div className="top"><div><span className="eyebrow">TRANSAKSI</span><h1>Simpanan</h1></div><Link className="btn" href="/admin">Dashboard</Link></div><section className="card form-card"><h2>Catat simpanan</h2><form action={createSimpanan} className="form-grid">{<label>Anggota<select name="nomor">{anggota.map(a=><option key={a.id} value={a.nomorAnggota||""}>{a.nomorAnggota} — {a.nama}</option>)}</select></label>}{[["pokok","Simpanan pokok"],["wajib","Simpanan wajib"],["sukarela","Sukarela"],["hariraya","Hari raya"],["khusus","Khusus"]].map(([n,l])=><label key={n}>{l}<input name={n} type="number" min="0" defaultValue="0"/></label>)}<button className="btn" type="submit">Simpan transaksi</button></form></section><div className="card"><table><thead><tr><th>Anggota</th><th>Pokok</th><th>Wajib</th><th>Sukarela</th><th>Hari Raya</th><th>Khusus</th></tr></thead><tbody>{rows.map(x=><tr key={x.idSmp}><td>{x.nomorAnggota} — {x.namaAnggota}</td><td>Rp {Number(x.spokok||0).toLocaleString("id-ID")}</td><td>Rp {Number(x.swajib||0).toLocaleString("id-ID")}</td><td>Rp {Number(x.ssukarela||0).toLocaleString("id-ID")}</td><td>Rp {Number(x.shariraya||0).toLocaleString("id-ID")}</td><td>Rp {Number(x.skhusus||0).toLocaleString("id-ID")}</td></tr>)}</tbody></table></div></main>}
+import Link from "next/link";
+import { prisma } from "@/lib/prisma";
+import { getSession } from "@/lib/auth";
+import { redirect } from "next/navigation";
+import { createSimpanan } from "../actions";
+
+export default async function Page() {
+  const s = await getSession();
+  if (!s || (s.role !== "admin" && s.role !== "master")) redirect("/login");
+
+  const [rows, anggota] = await Promise.all([
+    prisma.simpanan.findMany({ orderBy: { idSmp: "desc" } }),
+    prisma.anggota.findMany({
+      where: { statusAnggota: "Aktif" },
+      orderBy: { nomorAnggota: "asc" },
+    }),
+  ]);
+
+  return (
+    <main className="page">
+      <div className="top">
+        <div>
+          <span className="eyebrow">TRANSAKSI</span>
+          <h1>Simpanan</h1>
+        </div>
+        <Link className="btn" href="/admin">Dashboard</Link>
+      </div>
+
+      <section className="card form-card">
+        <h2>Catat simpanan</h2>
+        <form action={createSimpanan} className="form-grid">
+          <label>
+            Anggota
+            <select name="nomor" required>
+              {anggota.map((a) => (
+                <option key={a.id} value={a.nomorAnggota || ""}>
+                  {a.nomorAnggota} — {a.nama}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          {[["pokok", "Simpanan pokok"], ["wajib", "Simpanan wajib"], ["sukarela", "Sukarela"], ["hariraya", "Hari raya"], ["khusus", "Khusus"]].map(([n, l]) => (
+            <label key={n}>
+              {l}
+              <input name={n} type="number" min="0" defaultValue="0" />
+            </label>
+          ))}
+
+          <button className="btn" type="submit">Simpan transaksi</button>
+        </form>
+      </section>
+
+      <div className="card">
+        <table>
+          <thead>
+            <tr>
+              <th>Anggota</th><th>Pokok</th><th>Wajib</th><th>Sukarela</th><th>Hari Raya</th><th>Khusus</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((x) => (
+              <tr key={x.idSmp}>
+                <td>{x.nomorAnggota} — {x.namaAnggota}</td>
+                <td>Rp {Number(x.spokok || 0).toLocaleString("id-ID")}</td>
+                <td>Rp {Number(x.swajib || 0).toLocaleString("id-ID")}</td>
+                <td>Rp {Number(x.ssukarela || 0).toLocaleString("id-ID")}</td>
+                <td>Rp {Number(x.shariraya || 0).toLocaleString("id-ID")}</td>
+                <td>Rp {Number(x.skhusus || 0).toLocaleString("id-ID")}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </main>
+  );
+}
