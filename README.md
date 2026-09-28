@@ -662,8 +662,8 @@ Script aman dijalankan ulang. Jika username Master tersebut sudah ada, script ti
 | Peran | Username | Password | Keterangan |
 |---|---|---|---|
 | Master Admin | master | master123 | Kendali sistem |
-| Admin | admin-demo | admin123 | Operasional koperasi |
-| Anggota | anggota-demo | anggota123 | Portal anggota |
+| Admin | admin | admin123 | Operasional koperasi |
+| Anggota | anggota01 | anggota123 | Portal anggota |
 | Kelompok | Kelompok Demo | — | Bukan akun login |
 
 Buat data demo:
