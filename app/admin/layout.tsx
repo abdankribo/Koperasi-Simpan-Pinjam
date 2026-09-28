@@ -9,21 +9,25 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   return (
     <>
       <aside className="sidebar">
-        <div className="brand">DINKOPUM<br/><span>BASEKOP</span></div>
+        <div className="brand">
+          DINKOPUM
+          <br />
+          <span>BASEKOP • ADMIN</span>
+        </div>
         <nav>
-          <Link href="/admin">Dashboard</Link>
-          <Link href="/admin/anggota">Anggota</Link>
-          <Link href="/admin/simpanan">Simpanan</Link>
-          <Link href="/admin/pinjaman">Pinjaman</Link>
-          <Link href="/admin/riwayat/simpanan">Riwayat Simpanan</Link>
-          <Link href="/admin/riwayat/pinjaman">Riwayat Pinjaman</Link>
-          <Link href="/admin/laporan">Laporan / Neraca</Link>
-          <Link href="/admin/master-kelompok">Kelompok</Link>
-          <Link href="/admin/materi">Materi</Link>
-          <Link href="/admin/dokumentasi">Dokumentasi</Link>
-          <Link href="/admin/pengaturan">Pengaturan</Link>
-          <Link href="/admin/import">Import Excel</Link>
-          <a href="/logout">Keluar</a>
+          <Link href="/admin">▦ &nbsp; Dashboard</Link>
+          <Link href="/admin/anggota">♙ &nbsp; Anggota</Link>
+          <Link href="/admin/simpanan">◉ &nbsp; Simpanan</Link>
+          <Link href="/admin/pinjaman">▣ &nbsp; Pinjaman</Link>
+          <Link href="/admin/riwayat/simpanan">↺ &nbsp; Riwayat Simpanan</Link>
+          <Link href="/admin/riwayat/pinjaman">↺ &nbsp; Riwayat Pinjaman</Link>
+          <Link href="/admin/laporan">▤ &nbsp; Laporan / Neraca</Link>
+          <Link href="/admin/master-kelompok">⌘ &nbsp; Kelompok</Link>
+          <Link href="/admin/materi">▥ &nbsp; Materi</Link>
+          <Link href="/admin/dokumentasi">▧ &nbsp; Dokumentasi</Link>
+          <Link href="/admin/pengaturan">⚙ &nbsp; Pengaturan</Link>
+          <Link href="/admin/import">⇧ &nbsp; Import Excel</Link>
+          <a href="/logout">↪ &nbsp; Keluar</a>
         </nav>
       </aside>
       {children}
