@@ -14,7 +14,7 @@ export default async function MasterAdminLayout({ children }: { children: React.
           <Link href="/master-admin">⌂ &nbsp; Dashboard</Link>
           <Link href="/master-admin/kelompok">♟ &nbsp; Kelompok Master</Link>
           <Link href="/master-admin/akun">♙ &nbsp; Akun & Unit Master</Link>
-          <Link href="/admin">⚙ &nbsp; Administrasi</Link>
+          <Link href="/master-admin/administrasi">⚙ &nbsp; Administrasi</Link>
           <a href="/logout">↪ &nbsp; Keluar</a>
         </nav>
       </aside>
