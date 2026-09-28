@@ -6,7 +6,7 @@ import {
   createAdmin, updateAdmin, deleteAdmin,
   createAnggotaMaster, updateAnggotaMaster, deleteAnggotaMaster,
   createMaster, updateMaster, deleteMaster,
-  createKelompok, updateKelompok, deleteKelompok,
+  createKelompok, updateKelompok, deleteKelompok, createListKelompok, updateListKelompok, deleteListKelompok,
 } from "../actions";
 
 export default async function Page({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
@@ -14,10 +14,11 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ e
   if (!s || s.role !== "master") redirect("/login");
   const q = await searchParams;
 
-  const [masters, admins, groups, anggota] = await Promise.all([
+  const [masters, admins, groups, listGroups, anggota] = await Promise.all([
     prisma.masterAdmin.findMany({ orderBy: { idMaster: "asc" } }),
     prisma.admin.findMany({ orderBy: { idAdmin: "asc" } }),
     prisma.masterKelompok.findMany({ orderBy: { idMasterKel: "asc" } }),
+    prisma.listKelompok.findMany({ orderBy: { idKelompok: "asc" } }),
     prisma.anggota.findMany({ orderBy: { id: "asc" } }),
   ]);
 
@@ -100,7 +101,23 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ e
       </section>
 
       <section className="card">
-        <div className="top"><div><span className="eyebrow">3 • ANGGOTA KOPERASI</span><h2>Kelola akun & data anggota</h2><p>Username, password, identitas, unit, dan status anggota dapat dikendalikan Master Admin.</p></div></div>
+        <div className="top"><div><span className="eyebrow">3 • DATA KELOMPOK KOPERASI</span><h2>Kelola master kelompok</h2><p>Ini adalah daftar kelompok operasional yang dipakai modul administrasi koperasi.</p></div></div>
+        <form action={createListKelompok} className="form-grid">
+          <label>Nama kelompok<input name="nama" required /></label>
+          <button className="btn">+ Tambah Kelompok</button>
+        </form>
+        <div className="table-wrap" style={{ marginTop: 16 }}>
+          <table><thead><tr><th>ID</th><th>Nama Kelompok</th><th>Edit</th><th>Aksi</th></tr></thead><tbody>
+            {listGroups.map(x => <tr key={x.idKelompok}><td>{x.idKelompok}</td><td>{x.namaKelompok}</td>
+              <td><details><summary>Edit</summary><form action={updateListKelompok} className="form-grid" style={{marginTop:10}}><input type="hidden" name="id" value={x.idKelompok}/><label>Nama<input name="nama" defaultValue={x.namaKelompok} required/></label><button className="btn">Simpan</button></form></details></td>
+              <td><form action={deleteListKelompok}><input type="hidden" name="id" value={x.idKelompok}/><button className="danger">Hapus</button></form></td>
+            </tr>)}
+          </tbody></table>
+        </div>
+      </section>
+
+      <section className="card">
+        <div className="top"><div><span className="eyebrow">4 • ANGGOTA KOPERASI</span><h2>Kelola akun & data anggota</h2><p>Username, password, identitas, unit, dan status anggota dapat dikendalikan Master Admin.</p></div></div>
         <form action={createAnggotaMaster} className="form-grid">
           <label>Nomor anggota<input name="nomor" required /></label>
           <label>Nama<input name="nama" required /></label>
@@ -142,7 +159,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ e
       </section>
 
       <section className="card">
-        <span className="eyebrow">4 • AKUN MASTER</span>
+        <span className="eyebrow">5 • AKUN MASTER</span>
         <h2>Kelola akun Master</h2>
         <p>Akun Master tetap dikelola di sini. Password selalu disimpan sebagai hash bcrypt.</p>
         <form action={createMaster} className="form-grid" style={{ marginTop: 12 }}>
