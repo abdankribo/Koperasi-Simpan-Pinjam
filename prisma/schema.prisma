@@ -35,8 +35,6 @@ model Anggota {
   jenisKelamin   String?   @map("jenis_kelamin")
   statusAnggota  String?   @map("status_anggota")
   lastUpdate     Int?      @map("last_update")
-  simpananRecords SimpananRecord[]
-  pinjamanRecords PinjamanRecord[]
 
   @@map("anggota")
 }
@@ -136,7 +134,6 @@ model MasterAdmin {
   usernameMaster String @map("username_master")
   passwordMaster String @map("password_master")
   unit           String
-  kelompok       MasterKelompok[]
 
   @@map("master_admin")
 }
@@ -145,7 +142,6 @@ model MasterKelompok {
   idMasterKel    Int    @id @default(autoincrement()) @map("id_master_kel")
   usernameMaster String @map("username_master")
   namaKelompok   String @map("nama_kelompok")
-  master         MasterAdmin @relation(fields: [usernameMaster], references: [usernameMaster])
 
   @@map("master_kelompok")
 }
@@ -185,7 +181,6 @@ model PinjamanRecord {
   angsuranJasa        Decimal? @map("angsuran_jasa") @db.Decimal(10, 0)
   tanggalPinjaman     DateTime @map("tanggal_pinjaman") @db.Date
   bulan               String
-  anggota             Anggota? @relation(fields: [idAnggota], references: [nomorAnggota])
 
   @@map("pinjaman_record")
 }
@@ -241,7 +236,6 @@ model SimpananRecord {
   khususRec     Decimal? @map("khusus_rec") @db.Decimal(10, 0)
   tglSimpanan   DateTime? @map("tgl_simpanan") @db.Date
   bulan         String?
-  anggota       Anggota? @relation(fields: [idAnggota], references: [nomorAnggota])
 
   @@map("simpanan_record")
 }
