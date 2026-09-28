@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 
 export default async function AdminPage() {
   const s = await getSession();
-  if (!s || s.role !== "admin") redirect("/login");
+  if (!s || (s.role !== "admin" && s.role !== "master")) redirect("/login");
 
   const [anggota, simpanan, pinjaman] = await Promise.all([
     prisma.anggota.count(),
