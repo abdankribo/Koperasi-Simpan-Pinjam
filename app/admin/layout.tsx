@@ -15,6 +15,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
           <span>BASEKOP • ADMIN</span>
         </div>
         <nav>
+          {session.role === "master" && <Link href="/master-admin">← &nbsp; Kembali ke Master</Link>}
           <Link href="/admin">▦ &nbsp; Dashboard</Link>
           <Link href="/admin/anggota">♙ &nbsp; Anggota</Link>
           <Link href="/admin/simpanan">◉ &nbsp; Simpanan</Link>
