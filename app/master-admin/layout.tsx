@@ -9,11 +9,13 @@ export default async function MasterAdminLayout({ children }: { children: React.
   return (
     <>
       <aside className="sidebar">
-        <div className="brand">DINKOPUM<br/><span>MASTER</span></div>
+        <div className="brand">DINKOPUM<br/><span>MASTER ADMIN</span></div>
         <nav>
-          <Link href="/master-admin">Dashboard</Link>
-          <Link href="/master-admin/kelompok">Kelompok Master</Link>
-          <a href="/logout">Keluar</a>
+          <Link href="/master-admin">⌂ &nbsp; Dashboard</Link>
+          <Link href="/master-admin/kelompok">♟ &nbsp; Kelompok Master</Link>
+          <Link href="/master-admin/akun">♙ &nbsp; Akun & Unit Master</Link>
+          <Link href="/admin">⚙ &nbsp; Administrasi</Link>
+          <a href="/logout">↪ &nbsp; Keluar</a>
         </nav>
       </aside>
       {children}
