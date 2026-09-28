@@ -698,28 +698,41 @@ Jalur login:
 
 # 19. Ringkasan alur sistem
 
-LOGIN
-↓
-Validasi akun
-↓
-Pemeriksaan role
-↓
-┌───────────────┬────────────────┬──────────────────┐
-│               │                │
-ANGGOTA         ADMIN            MASTER ADMIN
-│               │                │
-│               │                ├─ Akun Master
-│               │                ├─ Akun Admin
-│               │                ├─ Data Anggota
-│               │                ├─ Kelompok Master
-│               │                └─ Administrasi
-│               │                         │
-│               └─────────────────────────┘
-│
-├─ Lihat Simpanan
-├─ Lihat Pinjaman
-├─ Lihat Riwayat
-└─ Kelola Akun
+Alur utama sistem dapat digambarkan sebagai berikut:
+
+```text
+                         ┌───────────────┐
+                         │     LOGIN     │
+                         └───────┬───────┘
+                                 │
+                                 ▼
+                       ┌───────────────────┐
+                       │  Validasi Akun    │
+                       └─────────┬─────────┘
+                                 │
+                                 ▼
+                       ┌───────────────────┐
+                       │ Pemeriksaan Role  │
+                       └─────────┬─────────┘
+                                 │
+          ┌──────────────────────┼──────────────────────┐
+          │                      │                      │
+          ▼                      ▼                      ▼
+   ┌─────────────┐       ┌─────────────┐       ┌────────────────┐
+   │   ANGGOTA   │       │    ADMIN    │       │  MASTER ADMIN  │
+   └──────┬──────┘       └──────┬──────┘       └───────┬────────┘
+          │                      │                      │
+          ▼                      ▼                      ▼
+   • Simpanan             • Data Anggota         • Kelompok Master
+   • Pinjaman             • Simpanan             • Akun Master
+   • Riwayat              • Pinjaman             • Akun Admin
+   • Kelola Akun          • Riwayat              • Data Anggota
+                          • Keuangan             • Administrasi
+                          • Laporan
+                          • Kelompok
+                          • Materi & Dokumentasi
+                          • Pengaturan
+```
 
 Semua data diproses melalui Prisma → MySQL/Railway.
 
