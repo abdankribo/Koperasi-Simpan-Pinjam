@@ -50,8 +50,8 @@ model AsetTetap {
 
 model BankRecord {
   idBankRec  Int      @id @default(autoincrement()) @map("id_bank_rec")
-  uangMasuk  Decimal  @default(0) @db.Decimal(10, 0)
-  uangKeluar Decimal  @default(0) @db.Decimal(10, 0)
+  uangMasuk  Decimal  @default(0) @map("uang_masuk") @db.Decimal(10, 0)
+  uangKeluar Decimal  @default(0) @map("uang_keluar") @db.Decimal(10, 0)
   keterangan String
   tanggal    DateTime @db.Date
 
