@@ -32,7 +32,8 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ e
     kelompok: "Nama kelompok dan username Master wajib diisi.",
     anggota: "Nomor anggota wajib diisi.",
     anggota_duplikat: "Nomor anggota atau username anggota sudah digunakan.",
-    anggota_username: "Username anggota wajib diisi.",
+    anggota_username: "Nomor anggota dan username wajib diisi.",
+    username_global: "Username sudah digunakan oleh akun lain. Gunakan username yang berbeda.",
   };
 
   return (
@@ -141,15 +142,20 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ e
               <td><details><summary>Edit</summary><form action={updateAnggotaMaster} className="form-grid" style={{ marginTop: 10 }}>
                 <input type="hidden" name="id" value={x.id}/>
                 <label>Nama<input name="nama" defaultValue={x.nama || ""} required /></label>
+                <label>Nomor anggota<input name="nomor" defaultValue={x.nomorAnggota || ""} required /></label>
                 <label>Username<input name="username" defaultValue={x.usernameUser || ""} required /></label>
+                <label>Koperasi<input name="koperasi" defaultValue={x.koperasiUser || ""} /></label>
                 <label>NIK<input name="nik" defaultValue={x.nik || ""} /></label>
                 <label>Unit<input name="unit" defaultValue={x.unit || ""} /></label>
                 <label>Jabatan<input name="jabatan" defaultValue={x.jabatanAnggota || ""} /></label>
                 <label>Telepon<input name="telepon" defaultValue={x.nomorTelepon || ""} /></label>
                 <label>Email<input name="email" defaultValue={x.email || ""} /></label>
+                <label>Tempat lahir<input name="tempatLahir" defaultValue={x.tempatLahir || ""} /></label>
+                <label>Jenis kelamin<select name="jenisKelamin" defaultValue={x.jenisKelamin || ""}><option value="">-</option><option>Laki-Laki</option><option>Perempuan</option></select></label>
                 <label>Status<select name="status" defaultValue={x.statusAnggota || "Aktif"}><option>Aktif</option><option>Tidak Aktif</option></select></label>
                 <label>Password baru<input name="password" type="password" placeholder="Kosongkan jika tidak diubah" /></label>
                 <label className="full">Alamat<textarea name="alamat" defaultValue={x.alamat || ""}/></label>
+                <label className="full">Keterangan<textarea name="keterangan" defaultValue={x.keterangan || ""}/></label>
                 <button className="btn">Simpan perubahan</button>
               </form></details></td>
               <td><form action={deleteAnggotaMaster}><input type="hidden" name="id" value={x.id}/><button className="danger" disabled={x.statusAnggota === "Tidak Aktif"}>Nonaktifkan</button></form></td>
