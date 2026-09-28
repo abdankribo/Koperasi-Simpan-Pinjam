@@ -43,7 +43,7 @@ export async function middleware(request: NextRequest) {
     if (role === "master") {
       const suffix = pathname.slice("/admin".length);
       const url = request.nextUrl.clone();
-      url.pathname = `/master-admin${suffix}` || "/master-admin";
+      url.pathname = `/master-admin/administrasi${suffix}`;
       return NextResponse.redirect(url);
     }
   }
