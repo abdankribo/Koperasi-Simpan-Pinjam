@@ -1,0 +1,250 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  idAdmin       Int    @id @default(autoincrement()) @map("id_admin")
+  usernameAdmin String @map("username_admin")
+  passwordAdmin String @map("password_admin")
+
+  @@map("admin")
+}
+
+model Anggota {
+  id             Int       @id @default(autoincrement())
+  nomorAnggota   String?   @map("nomor_anggota")
+  koperasiUser   String?   @map("koperasi_user")
+  nama           String?
+  usernameUser   String?   @map("username_user")
+  passwordUser   String?   @map("password_user")
+  nik            String?   @map("NIK")
+  fotoAnggota    String?   @map("foto_anggota")
+  jabatanAnggota String?   @map("jabatan_anggota")
+  unit           String?
+  keterangan     String?
+  alamat         String?   @db.Text
+  nomorTelepon   String?   @map("nomor_telepon")
+  email          String?
+  tempatLahir    String?   @map("tempat_lahir")
+  tanggalLahir   DateTime? @map("tanggal_lahir") @db.Date
+  jenisKelamin   String?   @map("jenis_kelamin")
+  statusAnggota  String?   @map("status_anggota")
+  lastUpdate     Int?      @map("last_update")
+
+  @@map("anggota")
+}
+
+model AsetTetap {
+  idAsetTetap Int      @id @default(autoincrement()) @map("id_aset_tetap")
+  inventaris  Decimal  @db.Decimal(10, 0)
+  penyusutan  Decimal  @db.Decimal(10, 0)
+  tahun       DateTime @db.Date
+
+  @@map("aset_tetap")
+}
+
+model BankRecord {
+  idBankRec  Int      @id @default(autoincrement()) @map("id_bank_rec")
+  uangMasuk  Decimal  @default(0) @db.Decimal(10, 0)
+  uangKeluar Decimal  @default(0) @db.Decimal(10, 0)
+  keterangan String
+  tanggal    DateTime @db.Date
+
+  @@map("bank_record")
+}
+
+model Beban {
+  idBeban          Int      @id @default(autoincrement()) @map("id_beban")
+  administrasi     Decimal  @default(0) @db.Decimal(10, 0)
+  pendapatanLain   Decimal  @default(0) @map("pendapatan_lain") @db.Decimal(10, 0)
+  rapatAnggota     Decimal  @default(0) @map("rapat_anggota") @db.Decimal(10, 0)
+  insentif         Decimal  @default(0) @db.Decimal(10, 0)
+  honorKetuaKel    Decimal  @default(0) @map("honor_ketua_kel") @db.Decimal(10, 0)
+  thr              Decimal  @default(0) @db.Decimal(10, 0)
+  atk              Decimal  @default(0) @db.Decimal(10, 0)
+  transportasi     Decimal  @default(0) @db.Decimal(10, 0)
+  sisihGedung      Decimal  @default(0) @map("sisih_gedung") @db.Decimal(10, 0)
+  sisihPiutang     Decimal  @default(0) @map("sisih_piutang") @db.Decimal(10, 0)
+  susutInventaris  Decimal  @default(0) @map("susut_inventaris") @db.Decimal(10, 0)
+  konsumsi         Decimal  @default(0) @db.Decimal(10, 0)
+  rawatAset        Decimal  @default(0) @map("rawat_aset") @db.Decimal(10, 0)
+  bebanLain        Decimal  @default(0) @map("beban_lain") @db.Decimal(10, 0)
+  pajakBadan       Decimal  @default(0) @map("pajak_badan") @db.Decimal(10, 0)
+  tahun            DateTime @db.Date
+
+  @@map("beban")
+}
+
+model Dokumentasi {
+  idDokumentasi Int    @id @default(autoincrement()) @map("id_dokumentasi")
+  namaGambar    String @map("nama_gambar")
+  judul         String
+  deskripsi     String
+
+  @@map("dokumentasi")
+}
+
+model Ekuitas {
+  idEkuitas Int      @id @default(autoincrement()) @map("id_ekuitas")
+  hibah     Decimal? @default(0) @db.Decimal(10, 0)
+  modal     Decimal? @default(0) @db.Decimal(10, 0)
+  resiko    Decimal? @default(0) @db.Decimal(10, 0)
+  tahun     Int
+
+  @@map("ekuitas")
+}
+
+model EkuitasRecord {
+  idEkurecord     Int      @id @default(autoincrement()) @map("id_ekurecord")
+  hibahRec        Decimal? @default(0) @map("hibah_rec") @db.Decimal(10, 0)
+  modalRec        Decimal? @default(0) @map("modal_rec") @db.Decimal(10, 0)
+  resikoRec       Decimal? @default(0) @map("resiko_rec") @db.Decimal(10, 0)
+  tanggalEkuitas  DateTime @map("tanggal_ekuitas") @db.Date
+
+  @@map("ekuitas_record")
+}
+
+model Kewajiban {
+  idKewajiban          Int      @id @default(autoincrement()) @map("id_kewajiban")
+  sewaGedung           Decimal  @default(0) @map("sewa_gedung") @db.Decimal(10, 0)
+  utangPajak           Decimal  @default(0) @map("utang_pajak") @db.Decimal(10, 0)
+  danaPengurusPengawas Decimal  @default(0) @map("dana_pengurus_pengawas") @db.Decimal(10, 0)
+  danaPendidikan      Decimal  @default(0) @map("dana_pendidikan") @db.Decimal(10, 0)
+  danaKaryawan        Decimal  @default(0) @map("dana_karyawan") @db.Decimal(10, 0)
+  danaSosial          Decimal  @default(0) @map("dana_sosial") @db.Decimal(10, 0)
+  tanggalKewajiban    DateTime? @map("tanggal_kewajiban") @db.Date
+
+  @@map("kewajiban")
+}
+
+model ListKelompok {
+  idKelompok   Int    @id @default(autoincrement()) @map("id_kelompok")
+  namaKelompok String @map("nama_kelompok")
+
+  @@map("list_kelompok")
+}
+
+model MasterAdmin {
+  idMaster       Int    @id @default(autoincrement()) @map("id_master")
+  usernameMaster String @map("username_master")
+  passwordMaster String @map("password_master")
+  unit           String
+
+  @@map("master_admin")
+}
+
+model MasterKelompok {
+  idMasterKel    Int    @id @default(autoincrement()) @map("id_master_kel")
+  usernameMaster String @map("username_master")
+  namaKelompok   String @map("nama_kelompok")
+
+  @@map("master_kelompok")
+}
+
+model Materi {
+  idMateri     Int     @id @default(autoincrement()) @map("id_materi")
+  namaMateri   String? @map("nama_materi")
+  tglPelatihan String? @map("tgl_pelatihan")
+  dokumenMateri String? @map("dokumen_materi")
+
+  @@map("materi")
+}
+
+model Pinjaman {
+  idPinjaman          Int      @id @default(autoincrement()) @map("id_pinjaman")
+  nomorAnggota        String   @map("nomor_anggota")
+  namaAnggota         String   @map("nama_anggota")
+  pinjamanPokok       Decimal? @default(0) @map("pinjaman_pokok") @db.Decimal(10, 0)
+  pinjamanJasa        Decimal? @default(0) @map("pinjaman_jasa") @db.Decimal(10, 0)
+  pinjamanKhususPokok Decimal? @default(0) @map("pinjaman_khusus_pokok") @db.Decimal(10, 0)
+  pinjamanKhususJasa  Decimal? @default(0) @map("pinjaman_khusus_jasa") @db.Decimal(10, 0)
+  angsuranPokok       Decimal? @default(0) @map("angsuran_pokok") @db.Decimal(10, 0)
+  angsuranJasa        Decimal? @default(0) @map("angsuran_jasa") @db.Decimal(10, 0)
+  unit                String?
+
+  @@map("pinjaman")
+}
+
+model PinjamanRecord {
+  idSimpnanRec        Int      @id @default(autoincrement()) @map("id_simpnan_rec")
+  idAnggota           String   @map("id_anggota")
+  pinjamanPokokRec    Decimal? @map("pinjaman_pokok_rec") @db.Decimal(10, 0)
+  pinjamanJasaRec     Decimal? @map("pinjaman_jasa_rec") @db.Decimal(10, 0)
+  pinjamanKhususPokok Decimal? @map("pinjaman_khusus_pokok") @db.Decimal(10, 0)
+  pinjamanKhususJasa  Decimal? @map("pinjaman_khusus_jasa") @db.Decimal(10, 0)
+  angsuranPokok       Decimal? @map("angsuran_pokok") @db.Decimal(10, 0)
+  angsuranJasa        Decimal? @map("angsuran_jasa") @db.Decimal(10, 0)
+  tanggalPinjaman     DateTime @map("tanggal_pinjaman") @db.Date
+  bulan               String
+
+  @@map("pinjaman_record")
+}
+
+model SetWeb {
+  idSet              Int     @id @default(autoincrement()) @map("id_set")
+  namaKoperasi       String? @map("nama_koperasi")
+  deskripsiKoperasi  String? @map("deskripsi_koperasi")
+  alamatKoperasi     String? @map("alamat_koperasi")
+  telpKoperasi       String? @map("telp_koperasi")
+  emailKoperasi      String? @map("email_koperasi")
+  logoKoperasi       String  @map("logo_koperasi")
+
+  @@map("set_web")
+}
+
+model Shu {
+  idShu             Int @id @default(autoincrement()) @map("id_shu")
+  cadanganModal     Int @default(0) @map("cadangan_modal")
+  cadanganResiko    Int @default(0) @map("cadangan_resiko")
+  anggotaSimpanan   Int @default(0) @map("anggota_simpanan")
+  anggotaPinjaman   Int @default(0) @map("anggota_pinjaman")
+  danaPp            Int @default(0) @map("dana_pp")
+  danaPendidikan   Int @default(0) @map("dana_pendidikan")
+  danaKaryawan      Int @default(0) @map("dana_karyawan")
+  danaSosial        Int @default(0) @map("dana_sosial")
+  tahun             Int @default(0)
+
+  @@map("shu")
+}
+
+model Simpanan {
+  idSmp         Int      @id @default(autoincrement()) @map("id_smp")
+  nomorAnggota  String?  @map("nomor_anggota")
+  namaAnggota   String?  @map("nama_anggota")
+  unit          String?
+  spokok        Decimal? @db.Decimal(10, 0)
+  swajib        Decimal? @db.Decimal(10, 0)
+  ssukarela     Decimal? @db.Decimal(10, 0)
+  shariraya     Decimal? @db.Decimal(10, 0)
+  skhusus       Decimal? @db.Decimal(10, 0)
+
+  @@map("simpanan")
+}
+
+model SimpananRecord {
+  idSimpanan    Int      @id @default(autoincrement()) @map("id_simpanan")
+  idAnggota     String?  @map("id_anggota")
+  pokokRec      Decimal? @map("pokok_rec") @db.Decimal(10, 0)
+  wajibRec      Decimal? @map("wajib_rec") @db.Decimal(10, 0)
+  sukarelaRec   Decimal? @map("sukarela_rec") @db.Decimal(10, 0)
+  harirayaRec   Decimal? @map("hariraya_rec") @db.Decimal(10, 0)
+  khususRec     Decimal? @map("khusus_rec") @db.Decimal(10, 0)
+  tglSimpanan   DateTime? @map("tgl_simpanan") @db.Date
+  bulan         String?
+
+  @@map("simpanan_record")
+}
+
+model VisiMisi {
+  idVmblkg        Int    @id @default(autoincrement()) @map("id_vmblkg")
+  visi            String @db.Text
+  misi            String @db.Text
+  latarBelakang   String @map("latar_belakang") @db.Text
+
+  @@map("visi_misi")
+}

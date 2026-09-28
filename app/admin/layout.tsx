@@ -1,0 +1,2 @@
+import Link from "next/link";
+export default function AdminLayout({children}:{children:React.ReactNode}){return <><aside className="sidebar"><div className="brand">DINKOPUM<br/><span>BASEKOP</span></div><nav><Link href="/admin">Dashboard</Link><Link href="/admin/anggota">Anggota</Link><Link href="/admin/simpanan">Simpanan</Link><Link href="/admin/pinjaman">Pinjaman</Link><Link href="/master-admin">Master Admin</Link><a href="/logout">Keluar</a></nav></aside>{children}</>}
