@@ -22,6 +22,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
           <Link href="/admin/pinjaman">▣ &nbsp; Pinjaman</Link>
           <Link href="/admin/riwayat/simpanan">↺ &nbsp; Riwayat Simpanan</Link>
           <Link href="/admin/riwayat/pinjaman">↺ &nbsp; Riwayat Pinjaman</Link>
+          <Link href="/admin/keuangan">💵 &nbsp; Keuangan</Link>
           <Link href="/admin/laporan">▤ &nbsp; Laporan / Neraca</Link>
           <Link href="/admin/master-kelompok">⌘ &nbsp; Kelompok</Link>
           <Link href="/admin/materi">▥ &nbsp; Materi</Link>

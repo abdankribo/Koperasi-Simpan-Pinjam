@@ -1,42 +1,8 @@
 "use server";
-import { prisma } from "@/lib/prisma";
-import { getSession } from "@/lib/auth";
-import { redirect } from "next/navigation";
-
-async function guard() {
-  const s = await getSession();
-  if (!s || s.role !== "master") redirect("/login");
-}
-
-export async function createKelompok(fd: FormData) {
-  await guard();
-  await prisma.masterKelompok.create({ data: { usernameMaster: String(fd.get("username") || ""), namaKelompok: String(fd.get("nama") || "") } });
-  redirect("/master-admin/kelompok");
-}
-
-export async function deleteKelompok(fd: FormData) {
-  await guard();
-  await prisma.masterKelompok.delete({ where: { idMasterKel: Number(fd.get("id")) } });
-  redirect("/master-admin/kelompok");
-}
-
-export async function createMaster(fd: FormData) {
-  await guard();
-  await prisma.masterAdmin.create({
-    data: {
-      usernameMaster: String(fd.get("username") || ""),
-      passwordMaster: String(fd.get("password") || ""),
-      unit: String(fd.get("unit") || "Koperasi")
-    }
-  });
-  redirect("/master-admin/akun");
-}
-
-export async function deleteMaster(fd: FormData) {
-  await guard();
-  const id = Number(fd.get("id"));
-  const count = await prisma.masterAdmin.count();
-  if (count <= 1) redirect("/master-admin/akun");
-  await prisma.masterAdmin.delete({ where: { idMaster: id } });
-  redirect("/master-admin/akun");
-}
+import {prisma} from "@/lib/prisma";import {getSession} from "@/lib/auth";import {redirect} from "next/navigation";import bcrypt from "bcryptjs";
+async function guard(){const s=await getSession();if(!s||s.role!=="master")redirect("/login");}
+export async function createKelompok(fd:FormData){await guard();const nama=String(fd.get("nama")||"").trim();const username=String(fd.get("username")||"").trim();if(!nama||!username)redirect("/master-admin/kelompok");await prisma.masterKelompok.create({data:{usernameMaster:username,namaKelompok:nama}});redirect("/master-admin/kelompok")}
+export async function deleteKelompok(fd:FormData){await guard();await prisma.masterKelompok.delete({where:{idMasterKel:Number(fd.get("id"))}});redirect("/master-admin/kelompok")}
+export async function createMaster(fd:FormData){await guard();const username=String(fd.get("username")||"").trim();const exists=await prisma.masterAdmin.findFirst({where:{usernameMaster:username}});if(exists)redirect("/master-admin/akun?error=duplikat");const password=String(fd.get("password")||"");if(!password)redirect("/master-admin/akun?error=password");await prisma.masterAdmin.create({data:{usernameMaster:username,passwordMaster:await bcrypt.hash(password,12),unit:String(fd.get("unit")||"Koperasi")}});redirect("/master-admin/akun")}
+export async function updateMaster(fd:FormData){await guard();const id=Number(fd.get("id"));const username=String(fd.get("username")||"").trim();const exists=await prisma.masterAdmin.findFirst({where:{usernameMaster:username,NOT:{idMaster:id}}});if(exists)redirect("/master-admin/akun?error=duplikat");const data:any={usernameMaster:username,unit:String(fd.get("unit")||"Koperasi")};const password=String(fd.get("password")||"");if(password)data.passwordMaster=await bcrypt.hash(password,12);await prisma.masterAdmin.update({where:{idMaster:id},data});redirect("/master-admin/akun")}
+export async function deleteMaster(fd:FormData){await guard();const id=Number(fd.get("id"));const count=await prisma.masterAdmin.count();if(count<=1)redirect("/master-admin/akun?error=terakhir");await prisma.masterAdmin.delete({where:{idMaster:id}});redirect("/master-admin/akun")}
