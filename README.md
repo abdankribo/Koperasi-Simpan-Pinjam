@@ -20,8 +20,10 @@ Repository ini sedang dimigrasikan dari aplikasi PHP native + MySQL/MariaDB menj
 - [x] Import anggota Excel/CSV
 - [x] Data materi, dokumentasi, dan konfigurasi website
 - [x] UI responsif dan dashboard role-based
-- [ ] Pengujian build dan end-to-end
-- [ ] Deployment Vercel
+- [x] Production build verification via GitHub Actions
+- [x] Role authorization and server-action guard verification
+- [ ] End-to-end testing against live database
+- [ ] Vercel project connection and deployment verification
 
 ## Struktur database
 
@@ -38,6 +40,8 @@ Aplikasi lama mempunyai tiga jalur login:
 - **Anggota** → `/anggota`
 - **Admin** → `/admin`
 - **Master Admin** → `/master-admin`
+
+Build CI terbaru telah lulus (`npm install`, `prisma generate`, dan `next build`).
 
 Password yang tersimpan dalam database lama tidak perlu diubah manual terlebih dahulu. Saat akun lama berhasil login melalui Next.js, password akan diubah menjadi bcrypt secara otomatis.
 
@@ -59,3 +63,10 @@ npm run dev
 ```
 
 > Database production jangan diubah menggunakan `prisma db push` sebelum skema legacy dan strategi migrasi data diverifikasi.
+
+## Catatan verifikasi produksi
+
+- Build production sudah diverifikasi pada GitHub Actions.
+- Skema Prisma telah dipetakan terhadap dump `dinkopum_base.sql` yang ada di repository.
+- Pengujian koneksi ke database live belum dilakukan karena kredensial/database production belum terhubung pada environment verifikasi.
+- Deployment Vercel belum diverifikasi karena belum ada project Vercel yang terhubung ke repository ini.
