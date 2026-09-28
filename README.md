@@ -11,15 +11,15 @@ Repository ini sedang dimigrasikan dari aplikasi PHP native + MySQL/MariaDB menj
 - [x] Autentikasi role-based: anggota, admin, master admin
 - [x] Session berbasis HTTP-only JWT cookie
 - [x] Password legacy plaintext dapat di-upgrade menjadi bcrypt setelah login berhasil
-- [ ] Migrasi seluruh halaman admin
-- [ ] Migrasi seluruh halaman anggota
-- [ ] Migrasi seluruh halaman master admin
-- [ ] Migrasi CRUD simpanan
-- [ ] Migrasi CRUD pinjaman
-- [ ] Migrasi laporan/neraca
-- [ ] Migrasi import Excel
-- [ ] Migrasi upload dokumen/gambar
-- [ ] Modernisasi UI/UX
+- [x] Migrasi modul utama admin (dashboard, anggota, simpanan, pinjaman, laporan, master, materi, dokumentasi, pengaturan)
+- [x] Migrasi dashboard, simpanan, pinjaman, dan edit akun anggota
+- [x] Migrasi dashboard dan kelompok master
+- [x] CRUD pencatatan simpanan + histori
+- [x] CRUD pencatatan pinjaman/angsuran + histori
+- [x] Ringkasan laporan/neraca
+- [x] Import anggota Excel/CSV
+- [x] Data materi, dokumentasi, dan konfigurasi website
+- [x] UI responsif dan dashboard role-based
 - [ ] Pengujian build dan end-to-end
 - [ ] Deployment Vercel
 
