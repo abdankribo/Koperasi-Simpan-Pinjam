@@ -23,22 +23,25 @@ export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const role = await getRole(request);
 
-  // Master Admin uses the complete Admin interface while keeping
-  // /master-admin in the browser URL.
+  // Master keeps its dedicated dashboard/navigation. Only the
+  // "Administrasi" area reuses the full Admin module internally.
   if (pathname === "/master-admin" || pathname.startsWith("/master-admin/")) {
     if (role !== "master") {
       return NextResponse.redirect(new URL("/login", request.url));
     }
 
-    const target = pathname.replace(/^\/master-admin(?=\/|$)/, "") || "/";
-    const url = request.nextUrl.clone();
-    url.pathname = target === "/" ? "/admin" : `/admin${target}`;
-    return NextResponse.rewrite(url);
+    if (pathname === "/master-admin/administrasi" || pathname.startsWith("/master-admin/administrasi/")) {
+      const suffix = pathname.slice("/master-admin/administrasi".length) || "";
+      const url = request.nextUrl.clone();
+      url.pathname = suffix ? `/admin${suffix}` : "/admin";
+      return NextResponse.rewrite(url);
+    }
+
+    return NextResponse.next();
   }
 
-  // Any Admin URL reached by a Master is redirected back to the
-  // Master namespace, so navigation and server-action redirects stay
-  // under /master-admin instead of exposing /admin.
+  // If a Master follows an existing Admin link/action, keep the
+  // browser inside the Master Admin namespace.
   if (pathname === "/admin" || pathname.startsWith("/admin/")) {
     if (role === "master") {
       const suffix = pathname.slice("/admin".length);
