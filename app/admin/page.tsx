@@ -71,6 +71,7 @@ export default async function AdminPage() {
             <b>↺ Riwayat Pinjaman</b>
             <span>Lihat histori pinjaman dan angsuran.</span>
           </Link>
+          <Link className="module" href="/admin/keuangan"><b>💵 Keuangan</b><span>Kelola kas, beban, aset, ekuitas, kewajiban, dan SHU.</span></Link>
           <Link className="module" href="/admin/laporan">
             <b>📊 Laporan / Neraca</b>
             <span>Ringkasan kondisi keuangan koperasi.</span>
