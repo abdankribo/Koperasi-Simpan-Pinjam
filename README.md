@@ -94,3 +94,32 @@ MASTER_UNIT=Koperasi
 ```
 
 Script bersifat aman untuk dijalankan ulang: jika username tersebut sudah ada, script tidak membuat akun duplikat dan tidak mengganti password yang sudah ada.
+
+
+## Akun Demo
+
+Akun berikut disediakan khusus untuk demonstrasi aplikasi. Untuk keamanan, gunakan kredensial berbeda pada production.
+
+| Peran | Username | Password | Keterangan |
+|---|---|---|---|
+| Master Admin | `master` | `master123` | Kendali penuh sistem |
+| Admin | `admin-demo` | `admin123` | Administrasi koperasi |
+| Kelompok | `Kelompok Demo` | — | Kelompok bukan jalur login; dikelola oleh Master Admin |
+| Anggota | `anggota-demo` | `anggota123` | Akun anggota koperasi |
+
+Jalur login:
+
+- Master Admin → `/login` → setelah login menuju `/master-admin`
+- Admin → `/login` → setelah login menuju `/admin`
+- Anggota → `/login` → setelah login menuju `/anggota`
+- Kelompok → bukan role login terpisah; data kelompok dikelola dari Master Admin.
+
+Untuk membuat akun demo secara idempotent pada database yang sedang digunakan:
+
+```bash
+npm run db:seed-demo
+```
+
+Script hanya membuat data demo jika username/record tersebut belum ada dan tidak menimpa password akun yang sudah ada.
+
+> Catatan: kredensial demo di atas ditujukan untuk development/staging/demo. Jangan gunakan password demo pada database production yang terbuka untuk publik.
