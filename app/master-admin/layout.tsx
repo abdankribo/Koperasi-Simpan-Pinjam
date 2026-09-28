@@ -1,0 +1,1 @@
+import Link from "next/link"; export default function Layout({children}:{children:React.ReactNode}){return <><aside className="sidebar"><div className="brand">DINKOPUM<br/><span>MASTER</span></div><nav><Link href="/master-admin">Dashboard</Link><Link href="/admin">Admin</Link><a href="/logout">Keluar</a></nav></aside>{children}</>}
