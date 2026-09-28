@@ -70,3 +70,27 @@ npm run dev
 - Skema Prisma telah dipetakan terhadap dump `dinkopum_base.sql` yang ada di repository.
 - Pengujian koneksi ke database live belum dilakukan karena kredensial/database production belum terhubung pada environment verifikasi.
 - Deployment Vercel belum diverifikasi karena belum ada project Vercel yang terhubung ke repository ini.
+
+## Bootstrap Master Admin
+
+Jika database belum memiliki akun pada tabel `master_admin`, jalankan perintah berikut dari environment yang terhubung ke database:
+
+```bash
+npm run db:seed-master
+```
+
+Secara default perintah tersebut membuat akun awal:
+
+- Username: `master`
+- Password: `master123`
+- Unit: `Koperasi`
+
+Untuk production, password dapat diganti tanpa mengubah source code dengan environment variable:
+
+```env
+MASTER_USERNAME=master
+MASTER_PASSWORD=password-ku-yang-kuat
+MASTER_UNIT=Koperasi
+```
+
+Script bersifat aman untuk dijalankan ulang: jika username tersebut sudah ada, script tidak membuat akun duplikat dan tidak mengganti password yang sudah ada.
