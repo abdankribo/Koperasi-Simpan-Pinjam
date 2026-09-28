@@ -23,6 +23,29 @@ export async function createKelompok(fd: FormData) {
   redirect("/master-admin/akun");
 }
 
+export async function createListKelompok(fd: FormData) {
+  await guard();
+  const nama = text(fd, "nama");
+  if (!nama) redirect("/master-admin/akun?error=kelompok_data");
+  await prisma.listKelompok.create({ data: { namaKelompok: nama } });
+  redirect("/master-admin/akun");
+}
+
+export async function updateListKelompok(fd: FormData) {
+  await guard();
+  const id = Number(fd.get("id"));
+  const nama = text(fd, "nama");
+  if (!id || !nama) redirect("/master-admin/akun?error=kelompok_data");
+  await prisma.listKelompok.update({ where: { idKelompok: id }, data: { namaKelompok: nama } });
+  redirect("/master-admin/akun");
+}
+
+export async function deleteListKelompok(fd: FormData) {
+  await guard();
+  await prisma.listKelompok.delete({ where: { idKelompok: Number(fd.get("id")) } });
+  redirect("/master-admin/akun");
+}
+
 export async function updateKelompok(fd: FormData) {
   await guard();
   const id = Number(fd.get("id"));
