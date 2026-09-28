@@ -12,6 +12,15 @@ async function guard() {
 
 const text = (fd: FormData, key: string) => String(fd.get(key) || "").trim();
 
+async function usernameTaken(username: string, opts?: { adminId?: number; masterId?: number; anggotaId?: number }) {
+  const [admin, master, anggota] = await Promise.all([
+    prisma.admin.findFirst({ where: { usernameAdmin: username, ...(opts?.adminId ? { NOT: { idAdmin: opts.adminId } } : {}) } }),
+    prisma.masterAdmin.findFirst({ where: { usernameMaster: username, ...(opts?.masterId ? { NOT: { idMaster: opts.masterId } } : {}) } }),
+    prisma.anggota.findFirst({ where: { usernameUser: username, ...(opts?.anggotaId ? { NOT: { id: opts.anggotaId } } : {}) } }),
+  ]);
+  return Boolean(admin || master || anggota);
+}
+
 export async function createKelompok(fd: FormData) {
   await guard();
   const nama = text(fd, "nama");
@@ -70,8 +79,7 @@ export async function createMaster(fd: FormData) {
   const username = text(fd, "username");
   const password = String(fd.get("password") || "");
   if (!username || password.length < 6) redirect("/master-admin/akun?error=password");
-  const exists = await prisma.masterAdmin.findFirst({ where: { usernameMaster: username } });
-  if (exists) redirect("/master-admin/akun?error=duplikat");
+  if (await usernameTaken(username)) redirect("/master-admin/akun?error=username_global");
   await prisma.masterAdmin.create({
     data: {
       usernameMaster: username,
@@ -86,10 +94,7 @@ export async function updateMaster(fd: FormData) {
   await guard();
   const id = Number(fd.get("id"));
   const username = text(fd, "username");
-  const exists = await prisma.masterAdmin.findFirst({
-    where: { usernameMaster: username, NOT: { idMaster: id } },
-  });
-  if (exists) redirect("/master-admin/akun?error=duplikat");
+  if (await usernameTaken(username, { masterId: id })) redirect("/master-admin/akun?error=username_global");
   const data: { usernameMaster: string; unit: string; passwordMaster?: string } = {
     usernameMaster: username,
     unit: text(fd, "unit") || "Koperasi",
@@ -114,8 +119,7 @@ export async function createAdmin(fd: FormData) {
   const username = text(fd, "username");
   const password = String(fd.get("password") || "");
   if (!username || password.length < 6) redirect("/master-admin/akun?error=admin_password");
-  const exists = await prisma.admin.findFirst({ where: { usernameAdmin: username } });
-  if (exists) redirect("/master-admin/akun?error=admin_duplikat");
+  if (await usernameTaken(username)) redirect("/master-admin/akun?error=username_global");
   await prisma.admin.create({
     data: {
       usernameAdmin: username,
@@ -130,10 +134,7 @@ export async function updateAdmin(fd: FormData) {
   const id = Number(fd.get("id"));
   const username = text(fd, "username");
   if (!id || !username) redirect("/master-admin/akun?error=admin_username");
-  const exists = await prisma.admin.findFirst({
-    where: { usernameAdmin: username, NOT: { idAdmin: id } },
-  });
-  if (exists) redirect("/master-admin/akun?error=admin_duplikat");
+  if (await usernameTaken(username, { adminId: id })) redirect("/master-admin/akun?error=username_global");
   const data: { usernameAdmin: string; passwordAdmin?: string } = { usernameAdmin: username };
   const password = String(fd.get("password") || "");
   if (password) {
@@ -159,9 +160,8 @@ export async function createAnggotaMaster(fd: FormData) {
   const username = text(fd, "username") || nomor;
   const password = String(fd.get("password") || nomor);
   if (!nomor || !username) redirect("/master-admin/akun?error=anggota");
-  const exists = await prisma.anggota.findFirst({
-    where: { OR: [{ nomorAnggota: nomor }, { usernameUser: username }] },
-  });
+  if (await usernameTaken(username)) redirect("/master-admin/akun?error=username_global");
+  const exists = await prisma.anggota.findFirst({ where: { nomorAnggota: nomor } });
   if (exists) redirect("/master-admin/akun?error=anggota_duplikat");
   await prisma.anggota.create({
     data: {
@@ -187,13 +187,15 @@ export async function createAnggotaMaster(fd: FormData) {
 export async function updateAnggotaMaster(fd: FormData) {
   await guard();
   const id = Number(fd.get("id"));
+  const nomor = text(fd, "nomor");
   const username = text(fd, "username");
-  if (!id || !username) redirect("/master-admin/akun?error=anggota_username");
-  const exists = await prisma.anggota.findFirst({
-    where: { usernameUser: username, NOT: { id } },
-  });
-  if (exists) redirect("/master-admin/akun?error=anggota_duplikat");
+  if (!id || !nomor || !username) redirect("/master-admin/akun?error=anggota_username");
+  if (await usernameTaken(username, { anggotaId: id })) redirect("/master-admin/akun?error=username_global");
+  const nomorExists = await prisma.anggota.findFirst({ where: { nomorAnggota: nomor, NOT: { id } } });
+  if (nomorExists) redirect("/master-admin/akun?error=anggota_duplikat");
   const data: any = {
+    nomorAnggota: nomor,
+    koperasiUser: text(fd, "koperasi"),
     nama: text(fd, "nama"),
     usernameUser: username,
     unit: text(fd, "unit"),
@@ -202,6 +204,8 @@ export async function updateAnggotaMaster(fd: FormData) {
     nomorTelepon: text(fd, "telepon"),
     email: text(fd, "email"),
     alamat: text(fd, "alamat"),
+    keterangan: text(fd, "keterangan"),
+    tempatLahir: text(fd, "tempatLahir"),
     statusAnggota: text(fd, "status") || "Aktif",
     lastUpdate: Math.floor(Date.now() / 1000),
   };
